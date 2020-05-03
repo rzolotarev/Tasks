@@ -31,12 +31,16 @@ namespace RectanglesFromPoints
             foreach (var point1 in points)
                 foreach (var point2 in points)
                 {
-                    if (point1.X == point2.X && point1.Y < point2.Y)
+                    if (point1.X == point2.X && point1.Y < point2.Y) // order doesn't matter
                     {
                         var pair = new PairY(point1.Y, point2.Y);
                         pairSet.TryAdd(pair, 0);
-                        number += pairSet[pair]; // calculating number of all combinations of vertical pairs
                         pairSet[pair]++;
+                        // calculating number of all combinations of vertical pairs
+                        // C(n,k) = C(n-1, k) + C(n-1, k-1)
+                        // C(n, 2) = C(n-1, 2) + C(n-1, 1)
+                        // C(n-1, 1) = number of found verticle lines
+                        number += (pairSet[pair] - 1);
                     }
                 }
 
