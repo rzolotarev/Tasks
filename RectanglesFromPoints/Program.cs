@@ -31,7 +31,9 @@ namespace RectanglesFromPoints
             foreach (var point1 in points)
                 foreach (var point2 in points)
                 {
-                    if (point1.X == point2.X && point1.Y < point2.Y) // order doesn't matter
+                    // order doesn't matter because we always have ordered pair
+                    // never (2,1)
+                    if (point1.X == point2.X && point1.Y < point2.Y)
                     {
                         var pair = new PairY(point1.Y, point2.Y);
                         pairSet.TryAdd(pair, 0);
@@ -47,6 +49,16 @@ namespace RectanglesFromPoints
             return number;
         }
 
+        private static int GetNumberOfRectanglesEventWithDifferentX(List<Point> points)
+        {
+
+            return 0;
+        }
+
+        private static bool CheckRectangular()
+        {
+            return false;
+        }
 
         struct PairY
         {

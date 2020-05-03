@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RectanglesFromPoints", "Rec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombinationsOfKFromN", "CombinationsOfKFromN\CombinationsOfKFromN.csproj", "{B224FEEC-E2A0-4DC9-9A95-C735F32AC9D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoLinesArePerpendicular", "TwoLinesArePerpendicular\TwoLinesArePerpendicular.csproj", "{BD893722-520E-4B04-81E6-83F5BC6999E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B224FEEC-E2A0-4DC9-9A95-C735F32AC9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B224FEEC-E2A0-4DC9-9A95-C735F32AC9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B224FEEC-E2A0-4DC9-9A95-C735F32AC9D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
