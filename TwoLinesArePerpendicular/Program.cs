@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TwoLinesArePerpendicular
 {
@@ -33,7 +34,10 @@ namespace TwoLinesArePerpendicular
             var diffY2 = point3.Y - point4.Y;
             if (diffX1 == 0)
                 return diffY2 == 0 && diffX2 != 0;
-
+            var ls = new LinkedList<int>();
+            LinkedListNode<int> p1 = ls.First;
+            p1.Next
+            ls.AddLast()
             if(diffX2 == 0)
                 return diffY1 == 0 && diffX1 != 0;
             

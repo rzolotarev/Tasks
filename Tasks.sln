@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombinationsOfKFromN", "Com
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoLinesArePerpendicular", "TwoLinesArePerpendicular\TwoLinesArePerpendicular.csproj", "{BD893722-520E-4B04-81E6-83F5BC6999E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedList", "LinkedList\LinkedList.csproj", "{34672321-21B4-43F7-A7CE-58C3314C6875}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knapska01", "Knapska01\Knapska01.csproj", "{D77E2D64-3307-482D-A537-032EAD1D50E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD893722-520E-4B04-81E6-83F5BC6999E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34672321-21B4-43F7-A7CE-58C3314C6875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34672321-21B4-43F7-A7CE-58C3314C6875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34672321-21B4-43F7-A7CE-58C3314C6875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34672321-21B4-43F7-A7CE-58C3314C6875}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77E2D64-3307-482D-A537-032EAD1D50E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77E2D64-3307-482D-A537-032EAD1D50E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77E2D64-3307-482D-A537-032EAD1D50E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77E2D64-3307-482D-A537-032EAD1D50E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
