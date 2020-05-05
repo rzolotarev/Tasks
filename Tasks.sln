@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicProgramming", "Dynam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortestPathDejkstraAlgo", "ShortestPathDejkstraAlgo\ShortestPathDejkstraAlgo.csproj", "{C32334CF-26B0-40BF-8C4F-6B7226ED9246}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AStartAlgo", "AStartAlgo\AStartAlgo.csproj", "{AF3EFC73-0899-4C83-92FC-BA2A015185BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "РуфзЫщке", "РуфзЫщке\РуфзЫщке.csproj", "{281721FE-4B00-4E1D-9726-9A7C53E565E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{C32334CF-26B0-40BF-8C4F-6B7226ED9246}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C32334CF-26B0-40BF-8C4F-6B7226ED9246}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C32334CF-26B0-40BF-8C4F-6B7226ED9246}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF3EFC73-0899-4C83-92FC-BA2A015185BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF3EFC73-0899-4C83-92FC-BA2A015185BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF3EFC73-0899-4C83-92FC-BA2A015185BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF3EFC73-0899-4C83-92FC-BA2A015185BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281721FE-4B00-4E1D-9726-9A7C53E565E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281721FE-4B00-4E1D-9726-9A7C53E565E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281721FE-4B00-4E1D-9726-9A7C53E565E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281721FE-4B00-4E1D-9726-9A7C53E565E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
