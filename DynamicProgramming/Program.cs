@@ -7,7 +7,7 @@ namespace DynamicProgramming
     class Program
     {
 
-        static int GetHeightFromRight(int idx, int[] ranking, int[] candy)
+        static long GetHeightFromRight(int idx, int[] ranking, long[] candy)
         {
             // 5 cases
             //   2
@@ -55,7 +55,7 @@ namespace DynamicProgramming
         // Complete the candies function below.
         static long candies(int n, int[] arr)
         {
-            var distributed = new int[n];
+            var distributed = new long[n];
             if (arr[1] >= arr[0])
             {
                 distributed[0] = 1;
