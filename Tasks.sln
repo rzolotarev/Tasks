@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeapSort", "РуфзЫщк�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarCalculating", "CalendarCalculating\CalendarCalculating.csproj", "{0525E6E2-8751-4578-8DE8-EF8328C2C540}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SherlockAndCost", "SherlockAndCost\SherlockAndCost.csproj", "{68373FC7-80CA-485F-9D3A-368874A9FA37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{0525E6E2-8751-4578-8DE8-EF8328C2C540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0525E6E2-8751-4578-8DE8-EF8328C2C540}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0525E6E2-8751-4578-8DE8-EF8328C2C540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
