@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarCalculating", "Cale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SherlockAndCost", "SherlockAndCost\SherlockAndCost.csproj", "{68373FC7-80CA-485F-9D3A-368874A9FA37}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountTheNumberOfArrays", "CountTheNumberOfArrays\CountTheNumberOfArrays.csproj", "{ECF4D80D-EFF0-4F50-BD85-6107E2C2C69B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubstringAndSum", "SubstringAndSum\SubstringAndSum.csproj", "{BC3A5571-2D3D-4DE5-97B6-D9A03DD2D486}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68373FC7-80CA-485F-9D3A-368874A9FA37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECF4D80D-EFF0-4F50-BD85-6107E2C2C69B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECF4D80D-EFF0-4F50-BD85-6107E2C2C69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECF4D80D-EFF0-4F50-BD85-6107E2C2C69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECF4D80D-EFF0-4F50-BD85-6107E2C2C69B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC3A5571-2D3D-4DE5-97B6-D9A03DD2D486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC3A5571-2D3D-4DE5-97B6-D9A03DD2D486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC3A5571-2D3D-4DE5-97B6-D9A03DD2D486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC3A5571-2D3D-4DE5-97B6-D9A03DD2D486}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
