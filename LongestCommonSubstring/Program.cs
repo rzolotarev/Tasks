@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 
 namespace LongestCommonSubstring {
     class Program {
 
-        private static Queue<int> trace = new Queue<int> ();
         static int lcs2 (char[] X, char[] Y, int m, int n) {
             int[, ] L = new int[m + 1, n + 1];
 
@@ -16,24 +16,35 @@ namespace LongestCommonSubstring {
                     if (i == 0 || j == 0)
                         L[i, j] = 0;
                     else if (X[i - 1] == Y[j - 1]) {
-                        trace.Enqueue (X[i]);
                         L[i, j] = L[i - 1, j - 1] + 1;
                     } else
                         L[i, j] = max (L[i - 1, j], L[i, j - 1]);
                 }
             }
 
-            for (int i = 0; i <= m; i++) {
-
-                for (int j = 0; j <= n; j++) {
-                    Console.Write (L[i, j]);
-                    Console.Write (" ");
+            var k = m;
+            var l = n;
+            var trace = new int[L[m, n]];
+            var index = L[m, n] - 1;
+            while (k > 0 && l > 0) {
+                if (X[k - 1] == Y[l - 1]) {
+                    trace[index] = X[k - 1];
+                    k--;
+                    l--;
+                    index--;
+                    continue;
                 }
-                Console.WriteLine ();
+
+                if (L[k - 1, l] > L[k, l - 1])
+                    k--;
+                else
+                    l--;
             }
 
-            return L[m, n];
+            for (var i = 0; i < trace.Length; i++)
+                Console.WriteLine (trace[i]);
 
+            return L[m, n];
         }
         /* Returns length of LCS for X[0..m-1], Y[0..n-1] */
         static int lcs (char[] X, char[] Y, int m, int n) {
