@@ -38,13 +38,13 @@ namespace CoinOnTable {
         private static int solve () {
             dfs (0, 0, 0, 0);
 
-            for (int i = 0; i < board.Length; i++) {
-                for (int j = 0; j < board[i].Length; j++) {
-                    Console.Write (costs[i][j]);
-                    Console.Write (' ');
-                }
-                Console.WriteLine ();
-            }
+            // for (int i = 0; i < board.Length; i++) {
+            //     for (int j = 0; j < board[i].Length; j++) {
+            //         Console.Write (costs[i][j]);
+            //         Console.Write (' ');
+            //     }
+            //     Console.WriteLine ();
+            // }
 
             for (int i = 0; i < board.Length; i++) {
                 for (int j = 0; j < board[i].Length; j++) {
@@ -63,6 +63,7 @@ namespace CoinOnTable {
         ///
         private static void dfs (int i, int j, int cost, int time) {
 
+            Console.WriteLine ($"dfs ({i}, {j}), time {time}, cost {cost}");
             if (!inBoard (i, j) || cost >= costs[i][j]) {
                 return;
             }
@@ -87,7 +88,6 @@ namespace CoinOnTable {
 
         private static bool inBoard (int i, int j) {
             var result = i >= 0 && i < board.Length && j >= 0 && j < board[i].Length;
-            Console.WriteLine ($"({i},{j}) in Bound {result} ");
             return result;
         }
     }
