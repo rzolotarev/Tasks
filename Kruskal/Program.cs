@@ -42,22 +42,19 @@ namespace Kruskal
             var edges = new Edge[gFrom.Count];
             for (var i = 0; i < gFrom.Count; i++)
                 edges[i] = new Edge() { From = gFrom[i], To = gTo[i], Weight = gWeight[i] };
+
             // sort by weights
             Array.Sort(edges, new EdgeComparator());
 
             var subsets = new Subset[gNodes + 1];
             for (var i = 1; i <= gNodes; i++)
-            {
-                subsets[i] = new Subset();
-                subsets[i].Parent = i;
-                subsets[i].Rank = 0;
-            }
+                subsets[i] = new Subset() { Parent = i, Rank = 0 };
 
             var minSpanTreeNodes = gNodes - 1;
             var includedEdges = 0;
             var index = -1;
             var resultSum = 0;
-            // TODO: could be that there is no connected node
+
             while (includedEdges < minSpanTreeNodes)
             {
                 index++;
@@ -65,7 +62,7 @@ namespace Kruskal
                 var subsetFrom = FindSubset(subsets, edge.From);
                 var subsetTo = FindSubset(subsets, edge.To);
 
-                // there is a loop
+                // there is a loop, since nodes belong to the same subset 
                 if (subsetFrom == subsetTo)
                     continue;
 
@@ -77,27 +74,31 @@ namespace Kruskal
             return resultSum;
         }
 
+        //path compression
         private static int FindSubset(Subset[] subsets, int node)
         {
             if (subsets[node].Parent == node)
                 return node;
 
-            return FindSubset(subsets, subsets[node].Parent);
+            subsets[node].Parent = FindSubset(subsets, subsets[node].Parent);
+            return subsets[node].Parent;
         }
 
-        private static void Union(Subset[] subsets, int from, int To)
+        // From and To - is a root nodes - subsets
+        private static void Union(Subset[] subsets, int From, int To)
         {
-            if (subsets[from].Rank == subsets[To].Rank)
+            if (subsets[From].Rank == subsets[To].Rank)
             {
-                subsets[To].Parent = from;
-                subsets[from].Rank++;
+                subsets[From].Parent = To;
+                subsets[To].Rank++;
                 return;
             }
 
-            if (subsets[from].Rank < subsets[To].Rank)
-                subsets[from].Parent = To;
+            // Tree with less nodes connects to tree with more nodes
+            if (subsets[From].Rank < subsets[To].Rank)
+                subsets[From].Parent = To;
             else
-                subsets[To].Parent = from;
+                subsets[To].Parent = From;
         }
         public class Subset
         {
