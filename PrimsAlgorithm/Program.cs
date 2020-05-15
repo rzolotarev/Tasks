@@ -9,7 +9,7 @@ namespace PrimsAlgorithm
     {
         static void Main(string[] args)
         {
-            using (var fs = new FileStream("", FileMode.Open))
+            using (var fs = new FileStream("input.txt", FileMode.Open))
             {
                 using (var sr = new StreamReader(fs))
                 {
@@ -39,13 +39,14 @@ namespace PrimsAlgorithm
         static int prims(int n, int[][] edges, int start)
         {
             var nodes = new Node[n + 1];
-            var queue = new MinHeap<Node>();
+            var queue = new MinHeap(n);
 
             var graph = new List<Node>[n + 1];
             for (var i = 1; i <= n; i++)
             {
                 graph[i] = new List<Node>();
-                nodes[i] = new Node() { Next = -1, Key = Int32.MaxValue, Vertex = i };
+                nodes[i] = new Node() { Key = Int32.MaxValue, Vertex = i };
+                queue.Enqueue(nodes[i]);
             }
 
             for (int i = 0; i < edges.Length; i++)
@@ -56,12 +57,14 @@ namespace PrimsAlgorithm
 
             var result = 0;
             nodes[start].Key = 0;
-            nodes[start].IsMST = true;
+            // nodes[start].IsMST = true;
 
             while (queue.Count > 0)
             {
                 var node = queue.Pull();
+                Console.WriteLine($"pulled {node.Vertex}- {node.Key}");
                 nodes[node.Vertex].IsMST = true; // in MST TREE
+
                 foreach (var adjNode in graph[node.Vertex])
                 {
                     if (nodes[adjNode.Vertex].IsMST == true)
@@ -69,21 +72,17 @@ namespace PrimsAlgorithm
 
                     if (nodes[adjNode.Vertex].Key > adjNode.Key)
                     {
-                        nodes[adjNode.Vertex].Key = adjNode.Key;
-                        nodes[node.Vertex].Next = adjNode.Vertex;
+                        nodes[adjNode.Vertex].Key = adjNode.Key; // updated in queue   
+                        nodes[adjNode.Vertex].Parent = node.Vertex;
                     }
                 }
             }
 
+            for (int i = 1; i <= n; i++)
+                result += nodes[i].Key;
+
             return result;
         }
 
-        public class Node
-        {
-            public int Key { get; set; }
-            public int Next { get; set; }
-            public int Vertex { get; set; }
-            public bool IsMST { get; set; }
-        }
     }
 }
