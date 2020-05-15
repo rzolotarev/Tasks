@@ -38,42 +38,52 @@ namespace PrimsAlgorithm
         // Complete the prims function below.
         static int prims(int n, int[][] edges, int start)
         {
-            var mstSet = new bool[n + 1];
             var nodes = new Node[n + 1];
             var queue = new MinHeap<Node>();
 
-            var graph = new List<int>[n + 1];
+            var graph = new List<Node>[n + 1];
             for (var i = 1; i <= n; i++)
             {
-                graph[i] = new List<int>();
-                nodes[i] = new Node() { Parent = -1, Key = Int32.MaxValue, Vertex = i };
-                queue.Add(nodes[i]);
+                graph[i] = new List<Node>();
+                nodes[i] = new Node() { Next = -1, Key = Int32.MaxValue, Vertex = i };
             }
 
             for (int i = 0; i < edges.Length; i++)
             {
-                graph[edges[i][0]].Add(edges[i][1]);
-                graph[edges[i][1]].Add(edges[i][0]);
+                graph[edges[i][0]].Add(new Node() { Vertex = edges[i][1], Key = edges[i][2] });
+                graph[edges[i][1]].Add(new Node() { Vertex = edges[i][0], Key = edges[i][2] });
             }
 
             var result = 0;
-            mstSet[start] = true;
             nodes[start].Key = 0;
+            nodes[start].IsMST = true;
 
             while (queue.Count > 0)
             {
                 var node = queue.Pull();
-                mstSet[node.Vertex] = true; // in MST TREE
+                nodes[node.Vertex].IsMST = true; // in MST TREE
+                foreach (var adjNode in graph[node.Vertex])
+                {
+                    if (nodes[adjNode.Vertex].IsMST == true)
+                        continue;
+
+                    if (nodes[adjNode.Vertex].Key > adjNode.Key)
+                    {
+                        nodes[adjNode.Vertex].Key = adjNode.Key;
+                        nodes[node.Vertex].Next = adjNode.Vertex;
+                    }
+                }
             }
 
             return result;
         }
 
-        class Node : IEquatable<Node>
+        public class Node
         {
             public int Key { get; set; }
-            public int Parent { get; set; }
+            public int Next { get; set; }
             public int Vertex { get; set; }
+            public bool IsMST { get; set; }
         }
     }
 }
