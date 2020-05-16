@@ -49,7 +49,8 @@ class Solution
             // go through adjacent nodes and calculate the shortes path to any node
             foreach (var adjNode in adjacencyList[i.Index])
             {
-                if (adjNode.Path + mapList[i.Index].Path < mapList[adjNode.Index].Path)
+
+                if ((long)adjNode.Path + mapList[i.Index].Path < (long)mapList[adjNode.Index].Path)
                 {
                     mapList[adjNode.Index].Path = adjNode.Path + mapList[i.Index].Path;
                     mapList[adjNode.Index].PrecedingNode = i.Index;
