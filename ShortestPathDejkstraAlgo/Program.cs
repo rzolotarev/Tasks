@@ -27,12 +27,10 @@ class Solution
         {
             adjacencyList[i] = (new LinkedList<Node>());
             mapList[i] = new Node() { Index = i, Path = int.MaxValue, PrecedingNode = -1 };
-            // queue.Add(mapList[i]);
         }
         mapList[0] = new Node() { Path = 0 };
         mapList[s].Path = 0;
-        queue.Add(mapList[s], true);
-        // queue.Reorder(); // put min into the root of the heap
+        queue.Add(mapList[s]);
 
         foreach (var currentEdges in edges)
         {
@@ -50,7 +48,6 @@ class Solution
             // go through adjacent nodes and calculate the shortes path to any node
             foreach (var adjNode in adjacencyList[i.Index])
             {
-
                 if ((long)adjNode.Path + mapList[i.Index].Path < (long)mapList[adjNode.Index].Path)
                 {
                     mapList[adjNode.Index].Path = adjNode.Path + mapList[i.Index].Path;
