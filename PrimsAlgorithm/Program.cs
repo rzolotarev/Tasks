@@ -57,7 +57,6 @@ namespace PrimsAlgorithm
 
             var result = 0;
             nodes[start].Key = 0;
-            // nodes[start].IsMST = true;
 
             while (queue.Count > 0)
             {

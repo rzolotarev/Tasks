@@ -1,24 +1,24 @@
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace MinHeaps
 {
     public class Node
     {
-        public int Key { get; set; }
-        public int Vertex { get; set; }
-        public bool IsMST { get; set; }
-        public int Parent { get; set; }
+        public int Index;
+        public int Path;
+        public int PrecedingNode;
+        public bool Visited;
     }
+
 
     public class MinHeap
     {
         private List<Node> queue = new List<Node>();
         public int Count;
 
-
-
-        public void Add(Node node)
+        public void Add(Node node, bool reorder = false)
         {
             if (queue.Count > Count)
                 queue[Count] = node;
@@ -26,11 +26,11 @@ namespace MinHeaps
                 queue.Add(node);
 
             Count++;
-
-            Reorder();
+            if (reorder)
+                Reorder();
         }
 
-        private void Reorder()
+        public void Reorder()
         {
             for (var i = Count / 2 - 1; i >= 0; i--)
             {
