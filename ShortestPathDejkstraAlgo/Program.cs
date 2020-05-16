@@ -27,11 +27,12 @@ class Solution
         {
             adjacencyList[i] = (new LinkedList<Node>());
             mapList[i] = new Node() { Index = i, Path = int.MaxValue, PrecedingNode = -1 };
-            queue.Add(mapList[i]);
+            // queue.Add(mapList[i]);
         }
         mapList[0] = new Node() { Path = 0 };
         mapList[s].Path = 0;
-        queue.Reorder(); // put min into the root of the heap
+        queue.Add(mapList[s], true);
+        // queue.Reorder(); // put min into the root of the heap
 
         foreach (var currentEdges in edges)
         {
@@ -44,7 +45,7 @@ class Solution
         while (queue.Count > 0)
         {
             var i = queue.Get();
-            mapList[i.Index].Visited = true;
+            mapList[i.Index].InQueue = false;
 
             // go through adjacent nodes and calculate the shortes path to any node
             foreach (var adjNode in adjacencyList[i.Index])
@@ -56,17 +57,15 @@ class Solution
                     mapList[adjNode.Index].PrecedingNode = i.Index;
 
                     // this node has been "removed" from heap
-                    if (mapList[adjNode.Index].Visited == true)
+                    if (mapList[adjNode.Index].InQueue == false)
                     {
-                        mapList[adjNode.Index].Visited = false;
-                        queue.Add(mapList[adjNode.Index], reorder: true);
-                        continue;
+                        mapList[adjNode.Index].InQueue = true;
+                        queue.Add(mapList[adjNode.Index]);
                     }
-                    else
-                        // if the node has not been visited, Reoreder is sufficient
-                        queue.Reorder();
                 }
             }
+
+            queue.Reorder();
         }
 
         return mapList.Where(node => node.Path != 0).Select(node => node.Path == Int32.MaxValue ? -1 : node.Path).ToArray();

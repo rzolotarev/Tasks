@@ -10,6 +10,7 @@ namespace MinHeaps
         public int Path;
         public int PrecedingNode;
         public bool Visited;
+        public bool InQueue;
     }
 
 
