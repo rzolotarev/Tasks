@@ -11,27 +11,27 @@ namespace DynamicProgramming
         // function for dfs traversal and to  
         // store the maximum value in []dp  
         // for every node till the leaves 
-        static void dfs(int[] a, List<int>[] v,
-                        int u, int parent)
+        static void dfs(int[] weights, List<int>[] vertices,
+                        int currentNode, int parentNode)
         {
 
-            // initially dp[u] is always a[u] 
-            dp[u] = a[u - 1];
+            // initially dp[u] is always a[u] since a starts from zero
+            dp[currentNode] = weights[currentNode - 1];
 
             // stores the maximum value from nodes 
             int maximum = 0;
 
             // traverse the tree 
-            foreach (int child in v[u])
+            foreach (int child in vertices[currentNode])
             {
 
                 // if child is parent, then we continue 
                 // without recursing further 
-                if (child == parent)
+                if (child == parentNode)
                     continue;
 
                 // call dfs for further traversal 
-                dfs(a, v, child, u);
+                dfs(weights, vertices, child, currentNode);
 
                 // store the maximum of previous visited  
                 // node and present visited node 
@@ -40,14 +40,14 @@ namespace DynamicProgramming
 
             // add the maximum value returned 
             // to the parent node 
-            dp[u] += maximum;
+            dp[currentNode] += maximum;
         }
 
         // function that returns the maximum value 
-        static int maximumValue(int[] a,
-                                List<int>[] v)
+        static int maximumValue(int[] weights,
+                                List<int>[] vertices)
         {
-            dfs(a, v, 1, 0);
+            dfs(weights, vertices, 1, 0);
             return dp[1];
         }
 
@@ -82,11 +82,11 @@ namespace DynamicProgramming
             v[7].Add(14); v[14].Add(7);
 
             // values of node 1, 2, 3....14 
-            int[] a = { 3, 2, 1, 10, 1, 3, 9,
+            int[] wieghts = { 3, 2, 1, 10, 1, 3, 9,
                     1, 5, 3, 4, 5, 9, 8 };
 
             // function call 
-            Console.WriteLine(maximumValue(a, v));
+            Console.WriteLine(maximumValue(wieghts, v));
         }
     }
 }
