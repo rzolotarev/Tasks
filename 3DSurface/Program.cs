@@ -17,8 +17,8 @@ namespace _3DSurface
             var topDaownPair = height * width * 2;
             var result = topDaownPair;
           
-            var mostTollestH = new List<int>();
-            var mostTollestW = new List<int>();
+            var mostTollestH = new int[height];
+            var mostTollestW = new int[width];
             FillMax(mostTollestH, mostTollestW, A);
 
             var currentSum = 0;
@@ -35,27 +35,30 @@ namespace _3DSurface
             return result;
         }
 
-        static void FillMax(List<int> mostTollestH, List<int> mostTollestW, int[][] A)
+        static void FillMax(int[] mostTollestH, int[] mostTollestW, int[][] A)
         {
             var height = A.Length;
             var width = A[0].Length;
-            var i = 0;
-            var j = 0;
-            while (i < height && j < width) 
-            {
+            var i = height - 1;
+            var j = width - 1;
+            while ((i | j) > 0) 
+            {                
+                if (i > 0)
+                    i--;
+                if (j > 0)
+                    j--;
+
                 var max = 0;
                 for(var w = 0; w < width; w++){
                     max = Math.Max(A[i][w], max);
                 }
+                mostTollestH[i] = max;
 
-                mostTollestH.Add(max);
                 max = 0;
                 for(var h = 0; h < height; h++){
                     max = Math.Max(A[h][j], max);
                 }
-                mostTollestW.Add(max);
-                i++;
-                j++;
+                mostTollestW[j] = max;                
             }
         }
     }
