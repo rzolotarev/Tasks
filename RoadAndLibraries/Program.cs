@@ -36,38 +36,27 @@ namespace RoadAndLibraries
 
             var min = 0;
             var visited = new bool[n + 1];
+            int verticis = 0;
             for(int i = 1; i < n + 1; i++){
                 if (visited[i])
                     continue;
-                var verticis = Dfs(i, adjCities, visited);
-
-                Console.WriteLine(verticis);
+                Dfs(i, adjCities, visited, ref verticis);
+                
                 min += (verticis - 1) * c_road + c_lib;
+                verticis = 0;
             }
 
             return min;
         }
 
-        static int Dfs(int vertex, Dictionary<int, List<int>> cities, bool[] visited) {
-            var verticies = 0;
-            var stack = new Stack<int>();
-            stack.Push(vertex);
-            while(stack.Count > 0) {       
-                var curNode = stack.Pop();     
-                foreach(var node in cities[curNode]){                   
-                    if (!visited[node]) {                         
-                        stack.Push(node);                             
-                    }
-                }
-                
-                if (visited[curNode])
-                    continue;
-
-                visited[curNode] = true;
-                verticies += 1;                                         
-            }
-
-            return verticies;
+        static void Dfs(int vertex, Dictionary<int, List<int>> cities, bool[] visited, ref int count) {            
+            count++;
+            visited[vertex] = true;
+            foreach(var node in cities[vertex]){                   
+                 if (!visited[node]) {
+                     Dfs(node, cities, visited, ref count);
+                 }
+            }            
         }
     }
 }
