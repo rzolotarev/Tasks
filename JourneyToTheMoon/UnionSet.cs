@@ -45,13 +45,23 @@ namespace UnionSets {
             
             if (Ranks[xRoot] > Ranks[yRoot])
             {
-                Parents[yRoot] = xRoot;                
+                Parents[yRoot] = xRoot;
+                for(var i = 0; i < N; i++)
+                {
+                    if (Parents[i] == yRoot)
+                        Parents[i] = xRoot;
+                }             
             }
             else 
             {
                 if (Ranks[xRoot] < Ranks[yRoot]) 
                 {
-                    Parents[xRoot] = yRoot;                
+                    Parents[xRoot] = yRoot;
+                    for(var i = 0; i < N; i++)
+                    {
+                        if (Parents[i] == xRoot)
+                            Parents[i] = yRoot;
+                    }              
                 }
                 else 
                 {
