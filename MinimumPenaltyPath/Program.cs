@@ -18,36 +18,40 @@ namespace MinimumPenaltyPath
 
         static int BeautifulPath(int[][] edges, int A, int B)
         {
-            var graph = new List<Node>[edges.Length + 1];
+            var graph = new Node[edges.Length + 1];
             for(var i = 0; i < edges.Length; i++)
             {
                 if (graph[edges[i][0]] == null)                
-                    graph[edges[i][0]] = new List<Node>();
+                    graph[edges[i][0]] = new Node();
 
                 if (graph[edges[i][1]] == null)                
-                    graph[edges[i][1]] = new List<Node>();
+                    graph[edges[i][1]] = new Node();
 
-                graph[edges[i][0]].Add(new Node(edges[i][1], edges[i][2]));
-                graph[edges[i][1]].Add(new Node(edges[i][0], edges[i][2]));         
+                graph[edges[i][0]].Adjacent.Add(new Node(edges[i][1], edges[i][2]));
+                graph[edges[i][1]].Adjacent.Add(new Node(edges[i][0], edges[i][2]));         
             }
 
+            var penaltyPaths = new List<int>();
             var visited = new bool[graph.Length];
             var queue = new Queue<int>();
             queue.Enqueue(A);
-            while(queue.Count > 0) 
+            while(queue.Count > 0)
             {
                 var current = queue.Dequeue();
                 var i = 0;
-                while(i < graph[current].Count)
-                {
-                    if (graph[current][i].Number == B)
+                while(i < graph[current].Adjacent.Count)
+                {                    
+                    var penalty = graph[current].Path | graph[current].Adjacent[i].Path;
+                    if (penalty < graph[graph[current].Adjacent[i].Number].Penalty)
                     {
-
+                        graph[graph[current].Adjacent[i].Number].Penalty = penalty;
                     }
+                    
+                    i++;
                 }
             }
 
-            return -1;
+            return graph[B].Penalty == Int32.MaxValue ? -1 : graph[B].Penalty;            
         }
 
         class Node 
@@ -56,16 +60,19 @@ namespace MinimumPenaltyPath
             public int Path { get; set; }
             public List<Node> Adjacent { get; set; }
             public bool Visited { get; set; }
+            public int Penalty { get; set; }
 
             public Node()
             {
                 Adjacent = new List<Node>();
+                Penalty = Int32.MaxValue;
             }
 
             public Node(int number, int path)
             {
                 Number = number;
-                Path = path;
+                Path = path;             
+                Penalty = Int32.MaxValue;   
                 Adjacent = new List<Node>();
             }
         }
