@@ -28,7 +28,7 @@ namespace JourneyToTheMoon
                 unionSet.Union(astronaut[i][0], astronaut[i][1]);
                           
             // symmary of all pairs            
-            var countries = unionSet.Groups.Where(g => g > 0).ToList<int>();            
+            var countries = unionSet.Groups.ToList<int>();            
             var sum = 0;
             var lastSum = countries[countries.Count - 1];
             for(int i = countries.Count() - 2; i >= 0; i--)
