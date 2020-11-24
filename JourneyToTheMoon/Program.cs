@@ -29,7 +29,7 @@ namespace JourneyToTheMoon
                           
             // symmary of all countries
             var sum = 0;
-            var countries = unionSet.Parents.GroupBy(p => p).Select(p => p.Count()).ToList<int>();            
+            var countries = unionSet.Groups.Where(g => g > 0).ToList<int>();            
             // foreach(var rank in countries)
             //     Console.WriteLine(rank);
             for(int i = countries.Count() - 1; i > 0; i--)            
