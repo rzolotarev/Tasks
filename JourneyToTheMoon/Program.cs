@@ -27,15 +27,16 @@ namespace JourneyToTheMoon
             for(int i = 0; i < astronaut.Length; i++)            
                 unionSet.Union(astronaut[i][0], astronaut[i][1]);
                           
-            // symmary of all countries
-            var sum = 0;
+            // symmary of all pairs            
             var countries = unionSet.Groups.Where(g => g > 0).ToList<int>();            
-            // foreach(var rank in countries)
-            //     Console.WriteLine(rank);
-            for(int i = countries.Count() - 1; i > 0; i--)            
-                for(int j = i - 1; j >= 0; j--)                
-                    sum += countries[i] * countries[j];
-
+            var sum = 0;
+            var lastSum = countries[countries.Count - 1];
+            for(int i = countries.Count() - 2; i >= 0; i--)
+            {
+                sum += countries[i] * lastSum;
+                lastSum += countries[i];
+            }
+            
             return sum;
         }
     }
