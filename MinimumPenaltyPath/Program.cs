@@ -10,7 +10,7 @@ namespace MinimumPenaltyPath
         static int nodesNumber = 0;
         static void Main(string[] args)
         {
-            using(var str = new StreamReader("test.txt")) 
+            using(var str = new StreamReader("test1.txt")) 
             {
                 while(!str.EndOfStream)
                 {
@@ -42,14 +42,12 @@ namespace MinimumPenaltyPath
         static int BeautifulPath(int[][] edges, int A, int B)
         {
             var graph = new Node[nodesNumber + 1];
+            for(var i = 0; i <= nodesNumber; i++) {
+                graph[i] = new Node();
+            }   
+
             for(var i = 0; i < edges.Length; i++)
             {
-                if (graph[edges[i][0]] == null)                
-                    graph[edges[i][0]] = new Node();
-
-                if (graph[edges[i][1]] == null)                
-                    graph[edges[i][1]] = new Node();
-
                 graph[edges[i][0]].Adjacent.Add(new Node(edges[i][1], edges[i][2]));
                 graph[edges[i][1]].Adjacent.Add(new Node(edges[i][0], edges[i][2]));         
             }
