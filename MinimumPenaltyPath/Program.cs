@@ -10,7 +10,7 @@ namespace MinimumPenaltyPath
         static int nodesNumber = 0;
         static void Main(string[] args)
         {
-            using(var str = new StreamReader("test1.txt")) 
+            using(var str = new StreamReader("test3.txt")) 
             {
                 while(!str.EndOfStream)
                 {
@@ -57,19 +57,30 @@ namespace MinimumPenaltyPath
             queue.Enqueue(A);
             while(queue.Count > 0)
             {
-                var current = queue.Dequeue();                               
+                var current = queue.Dequeue();  
+                Console.WriteLine(current);                             
                 foreach(var adj in graph[current].Adjacent)
-                {
-                    if (graph[adj.Number].Penalties.Count == 1 && graph[adj.Number].Penalties[0] == 0){
-                        Console.WriteLine(adj.Number);
-                        queue.Enqueue(adj.Number);
-                    }                    
-                        
-
-                    for(var i = 0; i < graph[current].Penalties.Count; i++)
+                {                        
+                    if (graph[current].Penalties.Count == 0)
                     {
-                        graph[adj.Number].Penalties.Add(graph[current].Penalties[i] | adj.Path);
-                    };                                                                                                    
+                        graph[adj.Number].Penalties.Add(adj.Path);
+                        queue.Enqueue(adj.Number);
+                    }
+                    else
+                    {
+                        var add = false;
+                        for(var i = 0; i < graph[current].Penalties.Count; i++)
+                        {
+                            var penalty = graph[current].Penalties[i] | adj.Path;
+                            if (!graph[adj.Number].Penalties.Contains(penalty)){
+                                add = true;
+                                graph[adj.Number].Penalties.Add(penalty);
+                            }
+                        };
+
+                        if (add)
+                            queue.Enqueue(adj.Number);
+                    }
                 }                
             }
 
@@ -87,14 +98,14 @@ namespace MinimumPenaltyPath
             public Node()
             {
                 Adjacent = new List<Node>();
-                Penalties = new List<int>() { 0 };
+                Penalties = new List<int>();
             }
 
             public Node(int number, int path)
             {
                 Number = number;
                 Path = path;             
-                Penalties = new List<int>() { 0 };
+                Penalties = new List<int>();
                 Adjacent = new List<Node>();
             }
         }
