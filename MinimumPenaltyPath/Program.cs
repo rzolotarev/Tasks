@@ -10,7 +10,7 @@ namespace MinimumPenaltyPath
         static int nodesNumber = 0;
         static void Main(string[] args)
         {
-            using(var str = new StreamReader("test1.txt")) 
+            using(var str = new StreamReader("test.txt")) 
             {
                 while(!str.EndOfStream)
                 {
@@ -53,24 +53,29 @@ namespace MinimumPenaltyPath
             }
             
             var queue = new Queue<int>();
-            graph[A].Penalty = 0;
+            // graph[A].Penalty = 0;
             graph[A].Path = 0;
             queue.Enqueue(A);
             while(queue.Count > 0)
             {
-                var current = queue.Dequeue();                
+                var current = queue.Dequeue();                               
                 foreach(var adj in graph[current].Adjacent)
-                {                                         
-                    var penalty = graph[current].Penalty | adj.Path;
-                    if (penalty < graph[adj.Number].Penalty)
+                {                   
+                    if (graph[adj.Number].Visited && graph[current].Visited)
+                        continue;
+
+                    for(var i = 0; i < graph[current].Penalties.Count; i++)
                     {
-                        graph[adj.Number].Penalty = penalty;
-                        queue.Enqueue(adj.Number);
-                    }                    
+                        graph[adj.Number].Penalties.Add(graph[current].Penalties[i] | adj.Path);
+                    };                    
+                                                                                
+                    queue.Enqueue(adj.Number);
                 }
+                graph[current].Visited = true;
             }
 
-            return graph[B].Penalty == Int32.MaxValue ? -1 : graph[B].Penalty;            
+            graph[B].Penalties = graph[B].Penalties.OrderBy(x => x).ToList();
+            return graph[B].Penalties.Count == 0 ? -1 : graph[B].Penalties.First();            
         }
 
         class Node 
@@ -78,19 +83,19 @@ namespace MinimumPenaltyPath
             public int Number { get; set; }
             public int Path { get; set; }
             public List<Node> Adjacent { get; set; }            
-            public int Penalty { get; set; }
-
+            public List<int> Penalties { get; set; }
+            public bool Visited { get; set; }
             public Node()
             {
                 Adjacent = new List<Node>();
-                Penalty = Int32.MaxValue;
+                Penalties = new List<int>() { 0 };
             }
 
             public Node(int number, int path)
             {
                 Number = number;
                 Path = path;             
-                Penalty = Int32.MaxValue;   
+                Penalties = new List<int>() { 0 };
                 Adjacent = new List<Node>();
             }
         }
