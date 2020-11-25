@@ -1,24 +1,47 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 
 namespace MinimumPenaltyPath
 {
     class Program
     {
+        static int nodesNumber = 0;
         static void Main(string[] args)
         {
-            var edges = new int[4][];
-            edges[0] = new int[3] {1, 2, 1};
-            edges[1] = new int[3] {1, 2, 1000};
-            edges[2] = new int[3] {2, 3, 3};
-            edges[3] = new int[3] {1, 3, 100};
-            Console.WriteLine(BeautifulPath(edges, 1, 3));
+            using(var str = new StreamReader("test.txt")) 
+            {
+                while(!str.EndOfStream)
+                {
+                    var line = str.ReadLine();                    
+                    string[] nm = line.Split(' ');
+
+                    int n = Convert.ToInt32(nm[0]);
+                    nodesNumber = n;
+                    int m = Convert.ToInt32(nm[1]);
+
+                    int[][] edges = new int[m][];
+
+                    for (int i = 0; i < m; i++) {
+                        edges[i] = Array.ConvertAll(str.ReadLine().Split(' '), edgesTemp => Convert.ToInt32(edgesTemp));
+                    }
+                    
+                    string[] AB = str.ReadLine().Split(' ');                    
+                    int A = Convert.ToInt32(AB[0]);
+
+                    int B = Convert.ToInt32(AB[1]);
+
+                    int result = BeautifulPath(edges, A, B);
+
+                    Console.WriteLine(result);
+               }
+            }
         }
 
         static int BeautifulPath(int[][] edges, int A, int B)
         {
-            var graph = new Node[edges.Length + 1];
+            var graph = new Node[nodesNumber + 1];
             for(var i = 0; i < edges.Length; i++)
             {
                 if (graph[edges[i][0]] == null)                
@@ -30,24 +53,22 @@ namespace MinimumPenaltyPath
                 graph[edges[i][0]].Adjacent.Add(new Node(edges[i][1], edges[i][2]));
                 graph[edges[i][1]].Adjacent.Add(new Node(edges[i][0], edges[i][2]));         
             }
-
-            var penaltyPaths = new List<int>();
-            var visited = new bool[graph.Length];
+            
             var queue = new Queue<int>();
+            graph[A].Penalty = 0;
+            graph[A].Path = 0;
             queue.Enqueue(A);
             while(queue.Count > 0)
             {
-                var current = queue.Dequeue();
-                var i = 0;
-                while(i < graph[current].Adjacent.Count)
-                {                    
-                    var penalty = graph[current].Path | graph[current].Adjacent[i].Path;
-                    if (penalty < graph[graph[current].Adjacent[i].Number].Penalty)
+                var current = queue.Dequeue();                
+                foreach(var adj in graph[current].Adjacent)
+                {                                         
+                    var penalty = graph[current].Penalty | adj.Path;
+                    if (penalty < graph[adj.Number].Penalty)
                     {
-                        graph[graph[current].Adjacent[i].Number].Penalty = penalty;
-                    }
-                    
-                    i++;
+                        graph[adj.Number].Penalty = penalty;
+                        queue.Enqueue(adj.Number);
+                    }                    
                 }
             }
 
@@ -58,8 +79,7 @@ namespace MinimumPenaltyPath
         {
             public int Number { get; set; }
             public int Path { get; set; }
-            public List<Node> Adjacent { get; set; }
-            public bool Visited { get; set; }
+            public List<Node> Adjacent { get; set; }            
             public int Penalty { get; set; }
 
             public Node()
