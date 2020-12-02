@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EventTree
 {
@@ -14,8 +15,19 @@ namespace EventTree
             if (t_nodes % 2 != 0)
                 throw new ArgumentException("t_nodes should be even number");
 
-            var graph = new List<int>[](t_nodes);
-            
+            var graph = new List<int>[t_nodes + 1];
+            for(int i = 0; i < t_from.Count; i++) {
+                if (graph[t_from[i]] == null)
+                    graph[t_from[i]] = new List<int>();
+
+                if (graph[t_to[i]] == null)
+                    graph[t_to[i]] = new List<int>();
+
+                graph[t_from[i]].Add(t_to[i]);
+                graph[t_to[i]].Add(t_from[i]);
+            }
+
+            return 0;
         }
     }
 }
