@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
 namespace EventTree
 {
@@ -7,7 +9,26 @@ namespace EventTree
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+                using(var strReader = new StreamReader("test.txt"))
+                {
+                        string[] tNodesEdges = strReader.ReadLine().TrimEnd().Split(' ');
+
+                        int tNodes = Convert.ToInt32(tNodesEdges[0]);
+                        int tEdges = Convert.ToInt32(tNodesEdges[1]);
+
+                        List<int> tFrom = new List<int>();
+                        List<int> tTo = new List<int>();
+
+                        for (int i = 0; i < tEdges; i++) {
+                            string[] tFromTo = strReader.ReadLine().TrimEnd().Split(' ');
+
+                            tFrom.Add(Convert.ToInt32(tFromTo[0]));
+                            tTo.Add(Convert.ToInt32(tFromTo[1]));
+                        }
+
+                        int res = evenForest(tNodes, tEdges, tFrom, tTo);
+                        Console.WriteLine(res);                        
+                }
         }
 
         static int evenForest(int t_nodes, int t_edges, List<int> t_from, List<int> t_to) 
@@ -28,24 +49,32 @@ namespace EventTree
             }
 
 
-            var visited = new bool[t_nodes + 1];            
-            var stack = new Stack<int>();            
-            stack.Push(1);
+            var visited = new bool[t_nodes + 1];
+            var dependentVertices = new int[t_nodes + 1];         
             visited[1] = true;
 
             var result = 0;
-            while(stack.Count > 0) {
-                var currentVertex = stack.Pop();
-                foreach(var vertex in graph[currentVertex]){
-                    if (visited[vertex] == true)
-                        continue;
-                        
-                    visited[vertex] = true;
-                    stack.Push(vertex);
-                }
+            TraverseGraph(graph, 1, visited, dependentVertices);
+            foreach(var i in dependentVertices){
+                Console.WriteLine(i);
             }
+            result = dependentVertices.Where(x => x != 0 && x % 2 == 0).Count();
+            return result - 1;
+        }
 
-            return result;
+        static void TraverseGraph(List<int>[] graph, int node, bool[] visited, int[] dependentVertices)
+        {
+            visited[node] = true;
+
+            foreach(var vertex in graph[node]) {
+                if (visited[vertex])
+                    continue;
+                                
+                TraverseGraph(graph, vertex, visited, dependentVertices);
+                dependentVertices[node] += dependentVertices[vertex];                
+                // return;                
+            }
+            dependentVertices[node] += 1;            
         }
     }
 }
