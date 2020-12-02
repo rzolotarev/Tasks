@@ -27,7 +27,25 @@ namespace EventTree
                 graph[t_to[i]].Add(t_from[i]);
             }
 
-            return 0;
+
+            var visited = new bool[t_nodes + 1];            
+            var stack = new Stack<int>();            
+            stack.Push(1);
+            visited[1] = true;
+
+            var result = 0;
+            while(stack.Count > 0) {
+                var currentVertex = stack.Pop();
+                foreach(var vertex in graph[currentVertex]){
+                    if (visited[vertex] == true)
+                        continue;
+                        
+                    visited[vertex] = true;
+                    stack.Push(vertex);
+                }
+            }
+
+            return result;
         }
     }
 }
