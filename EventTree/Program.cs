@@ -54,10 +54,7 @@ namespace EventTree
             visited[1] = true;
 
             var result = 0;
-            TraverseGraph(graph, 1, visited, dependentVertices);
-            foreach(var i in dependentVertices){
-                Console.WriteLine(i);
-            }
+            TraverseGraph(graph, 1, visited, dependentVertices);            
             result = dependentVertices.Where(x => x != 0 && x % 2 == 0).Count();
             return result - 1;
         }
@@ -72,7 +69,6 @@ namespace EventTree
                                 
                 TraverseGraph(graph, vertex, visited, dependentVertices);
                 dependentVertices[node] += dependentVertices[vertex];                
-                // return;                
             }
             dependentVertices[node] += 1;            
         }
